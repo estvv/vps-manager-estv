@@ -9,7 +9,7 @@ RESET='\033[0m'
 URL_UPDATE_MANAGER="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/update-manager.sh"
 DEST_UPDATE_MANAGER="$HOME/update-manager.sh"
 
-echo -e "$[1/3] Downloading the latest ${YELLOW}update-manager.sh${RESET} from GitHub..."
+echo -e "[1/3] Downloading the latest ${YELLOW}update-manager.sh${RESET} from GitHub..."
 
 if curl -s -f -o "$DEST_UPDATE_MANAGER" "$URL_UPDATE_MANAGER"; then
     echo -e "Main ${YELLOW}update-manager.sh${RESET} updated ${GREEN}successfully${RESET} !"
@@ -21,7 +21,7 @@ fi
 URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile"
 DEST_MAKEFILE="$HOME/Makefile"
 
-echo -e "\n$[2/3] Downloading the latest ${YELLOW}Makefile${RESET} from GitHub..."
+echo -e "\n[2/3] Downloading the latest ${YELLOW}Makefile${RESET} from GitHub..."
 
 if curl -s -f -o "$DEST_MAKEFILE" "$URL_MAKEFILE"; then
     echo -e "Main ${YELLOW}Makefile${RESET} updated ${GREEN}successfully${RESET} !"
@@ -33,7 +33,7 @@ fi
 URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/sub-Makefile"
 PROJECTS_DIR="$HOME/projects"
 
-echo -e "\n$[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."
+echo -e "\n[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."
 
 for DIR in "$PROJECTS_DIR"/*/; do
     if [ -d "$DIR" ]; then
