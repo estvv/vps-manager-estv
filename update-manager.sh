@@ -38,6 +38,7 @@ echo -e "\n[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."
 for DIR in "$PROJECTS_DIR"/*/; do
     if [ -d "$DIR" ]; then
         PROJECT_NAME=$(basename "$DIR")
+        echo -e "----------------------------------------------"
         echo -e "\n${YELLOW}Processing${RESET} project: ${CYAN}$PROJECT_NAME${RESET}"
 
         if curl -s -f -o "${DIR}Makefile" "$URL_SUB_MAKEFILE"; then
@@ -46,6 +47,7 @@ for DIR in "$PROJECTS_DIR"/*/; do
         else
             echo -e "   -> ${RED}Unable${RESET} to download the ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME.${RESET}"
         fi
+        echo -e "----------------------------------------------"
     fi
 done
 
