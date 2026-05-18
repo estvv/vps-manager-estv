@@ -15,8 +15,10 @@ RESET := \033[0m
 $(COMMANDS):
 	@echo "Running $(YELLOW)'$@'$(RESET) for all projects."
 	@for proj in $(PROJECT_NAMES); do \
+		echo "\n----------------------------------------------"; \
 		echo "Processing $(GREEN)$$proj$(RESET)"; \
 		$(MAKE) -C $(TARGET_DIR)/$$proj $@ || exit 1; \
+		echo "----------------------------------------------\n"; \
 	done
 
 define generate_target
