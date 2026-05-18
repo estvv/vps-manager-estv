@@ -1,13 +1,52 @@
 #!/bin/bash
 
-URL="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile"
-DEST="$HOME/Makefile"
+CYAN='\033[36m'
+GREEN='\033[32m'
+YELLOW='\033[33m'
+RED='\033[31m'
+RESET='\033[0m'
 
-echo "Downloading the latest Makefile from GitHub..."
+URL_UPDATE_MANAGER="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/update-manager.sh"
+DEST_UPDATE_MANAGER="$HOME/update-manager.sh"
 
-if curl -s -f -o "$DEST" "$URL"; then
-    echo "Main Makefile updated successfully!"
+echo -e "$[1/3] Downloading the latest ${YELLOW}update-manager.sh${RESET} from GitHub..."
+
+if curl -s -f -o "$DEST_UPDATE_MANAGER" "$URL_UPDATE_MANAGER"; then
+    echo -e "Main ${YELLOW}update-manager.sh${RESET} updated ${GREEN}successfully${RESET} !"
 else
-    echo "Error: Unable to download the Makefile. Check the URL."
+    echo -e "${RED}Unable${RESET} to download the ${YELLOW}update-manager.sh${RESET}. Check the URL."
     exit 1
 fi
+
+URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile"
+DEST_MAKEFILE="$HOME/Makefile"
+
+echo -e "\n$[2/3] Downloading the latest ${YELLOW}Makefile${RESET} from GitHub..."
+
+if curl -s -f -o "$DEST_MAKEFILE" "$URL_MAKEFILE"; then
+    echo -e "Main ${YELLOW}Makefile${RESET} updated ${GREEN}successfully${RESET} !"
+else
+    echo -e "${RED}Unable${RESET} to download the ${YELLOW}Makefile${RESET}. Check the URL."
+    exit 1
+fi
+
+URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/sub-Makefile"
+PROJECTS_DIR="$HOME/projects"
+
+echo -e "\n$[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."
+
+for DIR in "$PROJECTS_DIR"/*/; do
+    if [ -d "$DIR" ]; then
+        PROJECT_NAME=$(basename "$DIR")
+        echo -e "\n${YELLOW}Processing${RESET} project: ${CYAN}$PROJECT_NAME${RESET}"
+
+        if curl -s -f -o "${DIR}Makefile" "$URL_SUB_MAKEFILE"; then
+            echo -e "   -> ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME${RESET} updated ${GREEN}successfully!${RESET}"
+            continue
+        else
+            echo -e "   -> ${RED}Unable${RESET} to download the ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME.${RESET}"
+        fi
+    fi
+done
+
+echo -e "\nGlobal infrastructure update completed ${GREEN}successfully${RESET} !"
