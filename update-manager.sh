@@ -47,7 +47,7 @@ for DIR in "$PROJECTS_DIR"/*/; do
         echo -e "${YELLOW}Processing${RESET} project: ${CYAN}$PROJECT_NAME${RESET}"
 
         if curl -s -f -o "${DIR}Makefile" "$URL_SUB_MAKEFILE"; then
-            echo -e "   -> ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME${RESET} updated ${GREEN}successfully!${RESET}"
+            echo -e "   -> ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME${RESET} updated ${GREEN}successfully${RESET} !"
             echo -e "----------------------------------------------\n"
             continue
         else
