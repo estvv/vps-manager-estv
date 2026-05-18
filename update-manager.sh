@@ -48,11 +48,12 @@ for DIR in "$PROJECTS_DIR"/*/; do
 
         if curl -s -f -o "${DIR}Makefile" "$URL_SUB_MAKEFILE"; then
             echo -e "   -> ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME${RESET} updated ${GREEN}successfully!${RESET}"
+            echo -e "----------------------------------------------\n"
             continue
         else
             echo -e "   -> ${RED}Unable${RESET} to download the ${YELLOW}sub-Makefile${RESET} for ${CYAN}$PROJECT_NAME.${RESET}"
+            echo -e "----------------------------------------------\n"
         fi
-        echo -e "----------------------------------------------\n"
     fi
 done
 
