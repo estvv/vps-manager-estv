@@ -20,7 +20,7 @@ else
 fi
 echo -e "----------------------------------------------\n"
 
-URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile.main.template"
+URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/main/Makefile"
 DEST_MAKEFILE="$HOME/Makefile"
 
 echo -e "----------------------------------------------"
@@ -33,7 +33,7 @@ else
 fi
 echo -e "----------------------------------------------\n"
 
-URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile.subfolder.template"
+URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/subfolders/Makefile"
 PROJECTS_DIR="$HOME/projects"
 
 echo -e "----------------------------------------------"
