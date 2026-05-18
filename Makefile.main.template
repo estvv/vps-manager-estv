@@ -1,4 +1,7 @@
-SUBDIRS := $(patsubst %/,%,$(dir $(wildcard */Makefile)))
+TARGET_DIR := projects
+
+PROJECT_NAMES := $(notdir $(patsubst %/,%,$(dir $(wildcard $(TARGET_DIR)/*/Makefile))))
+
 COMMANDS := pull up down down-v restart update backup
 
 CYAN := \033[36m
@@ -11,15 +14,15 @@ RESET := \033[0m
 
 $(COMMANDS):
 	@echo "Running $(YELLOW)'$@'$(RESET) for all projects."
-	@for dir in $(SUBDIRS); do \
-		echo "Processing $(GREEN)$$dir$(RESET)"; \
-		$(MAKE) -C $$dir $@ || exit 1; \
+	@for proj in $(PROJECT_NAMES); do \
+		echo "Processing $(GREEN)$$proj$(RESET)"; \
+		$(MAKE) -C $(TARGET_DIR)/$$proj $@ || exit 1; \
 	done
 
 define generate_target
-	$(1)-$(2):
-		@echo "Executing $(YELLOW)'$(2)'$(RESET) on $(GREEN)'$(1)'$(RESET)."
-		@$$(MAKE) -C $(1) $(2)
+$(1)-$(2):
+	@echo "Executing $(YELLOW)'$(2)'$(RESET) on $(GREEN)'$(1)'$(RESET)."
+	@$$(MAKE) -C $(TARGET_DIR)/$(1) $(2)
 endef
 
-$(foreach proj,$(SUBDIRS),$(foreach cmd,$(COMMANDS),$(eval $(call generate_target,$(proj),$(cmd)))))
+$(foreach proj,$(PROJECT_NAMES),$(foreach cmd,$(COMMANDS),$(eval $(call generate_target,$(proj),$(cmd)))))
