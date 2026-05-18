@@ -18,7 +18,7 @@ else
     exit 1
 fi
 
-URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile"
+URL_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile.main.template"
 DEST_MAKEFILE="$HOME/Makefile"
 
 echo -e "\n[2/3] Downloading the latest ${YELLOW}Makefile${RESET} from GitHub..."
@@ -30,7 +30,7 @@ else
     exit 1
 fi
 
-URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/sub-Makefile"
+URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile.subfolder.template"
 PROJECTS_DIR="$HOME/projects"
 
 echo -e "\n[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."

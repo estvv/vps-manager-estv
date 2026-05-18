@@ -1,4 +1,9 @@
-PROJECT_NAME := $(shell basename $(CURDIR))
+SHELL := /bin/bash
+
+TARGET_DIR=projects
+
+PROJECT_NAME := $(notdir $(patsubst %/,%,$(dir $(wildcard $(TARGET_DIR)/*/Makefile))))
+
 DATE := $(shell date +%Y-%m-%d)
 
 CYAN := \033[36m
@@ -9,35 +14,37 @@ RESET := \033[0m
 
 .PHONY: pull up down down-v restart backup update
 
+all: pull up
+
 pull:
-	@echo "Pulling latest changes for $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@echo -e "Pulling latest changes for $(GREEN)$(PROJECT_NAME)$(RESET)..."
 	git pull -q origin main
 
 up:
-	@echo "Running $(YELLOW)docker compose up -d$(RESET) for $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@echo -e "Running $(YELLOW)docker compose up -d$(RESET) for $(GREEN)$(PROJECT_NAME)$(RESET)..."
 	docker compose up -d
 
 down:
-	@echo "Stopping $(GREEN)$(PROJECT_NAME)$(RESET) with $(YELLOW)docker compose down$(RESET)..."
+	@echo -e "Stopping $(GREEN)$(PROJECT_NAME)$(RESET) with $(YELLOW)docker compose down$(RESET)..."
 	docker compose down
 
 down-v:
-	@echo "Stopping $(GREEN)$(PROJECT_NAME)$(RESET) and removing volumes with $(YELLOW)docker compose down -v$(RESET)..."
+	@echo -e "Stopping $(GREEN)$(PROJECT_NAME)$(RESET) and removing volumes with $(YELLOW)docker compose down -v$(RESET)..."
 	docker compose down -v
 
 restart:
-	@echo "Restarting $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@echo -e "Restarting $(GREEN)$(PROJECT_NAME)$(RESET)..."
 	docker compose restart
 
 update: pull
-	@echo "Building and restarting $(GREEN)$(PROJECT_NAME)$(RESET) with latest changes..."
+	@echo -e "Building and restarting $(GREEN)$(PROJECT_NAME)$(RESET) with latest changes..."
 	docker compose up -d --build --remove-orphans
 
 backup:
-	@echo "Creating backup for $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@echo -e "Creating backup for $(GREEN)$(PROJECT_NAME)$(RESET)..."
 	tar -czf ../backup_$(PROJECT_NAME)_$(DATE).tar.gz \
 		--exclude='target' \
 		--exclude='node_modules' \
 		--exclude='.git' \
 		.
-	@echo "Backup created: $(CYAN)backup_$(PROJECT_NAME)_$(DATE).tar.gz$(RESET)"
+	@echo -e "Backup created: $(CYAN)backup_$(PROJECT_NAME)_$(DATE).tar.gz$(RESET)"
