@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="https://github.com/estvv/vps-manager-estv.git/main/Makefile"
+URL="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile"
 DEST="$HOME/Makefile"
 
 echo "Downloading the latest Makefile from GitHub..."
