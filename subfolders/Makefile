@@ -31,7 +31,11 @@ restart:
 
 update: pull
 	@echo "Building and restarting $(GREEN)$(PROJECT_NAME)$(RESET) with latest changes..."
-	docker compose up -d --build --remove-orphans
+	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
+		docker compose up -d --build --remove-orphans; \
+	else \
+		echo "No $(YELLOW)docker-compose.yml$(RESET) found, $(RED)skipping Docker step$(RESET)."; \
+	fi
 
 backup:
 	@echo "Creating backup for $(GREEN)$(PROJECT_NAME)$(RESET)..."
