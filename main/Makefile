@@ -24,7 +24,7 @@ $(COMMANDS):
 define generate_target
 $(1)-$(2):
 	@echo "Executing $(YELLOW)'$(2)'$(RESET) on $(GREEN)'$(1)'$(RESET)."
-	@$$(MAKE) -C $(TARGET_DIR)/$(1) $(2)
+	@$$(MAKE) -C $(TARGET_DIR)/$(1) $(2) || echo "$(RED)Failed$(RESET) to execute $(YELLOW)'$(2)'$(RESET) on $(GREEN)$(1)$(RESET)";
 endef
 
 $(foreach proj,$(PROJECT_NAMES),$(foreach cmd,$(COMMANDS),$(eval $(call generate_target,$(proj),$(cmd)))))
