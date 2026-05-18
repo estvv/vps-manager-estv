@@ -11,7 +11,7 @@ RESET := \033[0m
 
 pull:
 	@echo "Pulling latest changes for $(GREEN)$(PROJECT_NAME)$(RESET)..."
-	git pull -q origin main
+	@git pull -q origin main
 
 up:
 	@echo "Running $(YELLOW)docker compose up -d$(RESET) for $(GREEN)$(PROJECT_NAME)$(RESET)..."
