@@ -33,12 +33,12 @@ fi
 URL_SUB_MAKEFILE="https://raw.githubusercontent.com/estvv/vps-manager-estv/main/Makefile.subfolder.template"
 PROJECTS_DIR="$HOME/projects"
 
-echo -e "\n[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects..."
+echo -e "\n[3/3] Updating ${YELLOW}sub-Makefiles${RESET} in projects...\n"
 
 for DIR in "$PROJECTS_DIR"/*/; do
     if [ -d "$DIR" ]; then
         PROJECT_NAME=$(basename "$DIR")
-        echo -e "\n----------------------------------------------"
+        echo -e "----------------------------------------------"
         echo -e "${YELLOW}Processing${RESET} project: ${CYAN}$PROJECT_NAME${RESET}"
 
         if curl -s -f -o "${DIR}Makefile" "$URL_SUB_MAKEFILE"; then
