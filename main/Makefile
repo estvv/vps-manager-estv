@@ -29,4 +29,8 @@ $(1)-$(2):
 	@$$(MAKE) --no-print-directory -C $(TARGET_DIR)/$(1) $(2) || echo "$(RED)Failed$(RESET) to execute $(YELLOW)'$(2)'$(RESET) on $(GREEN)$(1)$(RESET)";
 endef
 
+caddy-reload:
+	@echo "Reloading $(CYAN)Caddy$(RESET) configuration..."
+	@sudo systemctl reload caddy && echo "Caddy reloaded $(GREEN)successfully$(RESET) !" || echo "$(RED)Failed$(RESET) to reload Caddy."
+
 $(foreach proj,$(PROJECT_NAMES),$(foreach cmd,$(COMMANDS) $(INTERACTIVE),$(eval $(call generate_target,$(proj),$(cmd)))))

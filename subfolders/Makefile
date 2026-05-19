@@ -55,7 +55,15 @@ status:
 	fi
 
 logs:
-	@echo "Showing logs for $(GREEN)$(PROJECT_NAME)$(RESET) (Ctrl+C to exit)..."
+	@echo "Showing last 50 logs for $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
+		docker compose logs --tail=50; \
+	else \
+		echo "No $(YELLOW)docker-compose.yml$(RESET) found, $(RED)skipping$(RESET)."; \
+	fi
+
+logs-f:
+	@echo "Following logs for $(GREEN)$(PROJECT_NAME)$(RESET) (Ctrl+C to exit)..."
 	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
 		docker compose logs --tail=50 -f; \
 	else \
