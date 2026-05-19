@@ -2,7 +2,9 @@ TARGET_DIR := projects
 
 PROJECT_NAMES := $(notdir $(patsubst %/,%,$(dir $(wildcard $(TARGET_DIR)/*/Makefile))))
 
-COMMANDS := pull up down down-v restart update backup
+COMMANDS := pull up down down-v restart update backup status
+
+INTERACTIVE := logs
 
 CYAN := \033[36m
 GREEN := \033[32m
@@ -27,4 +29,4 @@ $(1)-$(2):
 	@$$(MAKE) --no-print-directory -C $(TARGET_DIR)/$(1) $(2) || echo "$(RED)Failed$(RESET) to execute $(YELLOW)'$(2)'$(RESET) on $(GREEN)$(1)$(RESET)";
 endef
 
-$(foreach proj,$(PROJECT_NAMES),$(foreach cmd,$(COMMANDS),$(eval $(call generate_target,$(proj),$(cmd)))))
+$(foreach proj,$(PROJECT_NAMES),$(foreach cmd,$(COMMANDS) $(INTERACTIVE),$(eval $(call generate_target,$(proj),$(cmd)))))

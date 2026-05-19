@@ -45,3 +45,19 @@ backup:
 		--exclude='.git' \
 		.
 	@echo "Backup created: $(CYAN)backup_$(PROJECT_NAME)_$(DATE).tar.gz$(RESET)"
+
+status:
+	@echo "Checking status for $(GREEN)$(PROJECT_NAME)$(RESET)..."
+	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
+		docker compose ps; \
+	else \
+		echo "No $(YELLOW)docker-compose.yml$(RESET) found, $(RED)skipping$(RESET)."; \
+	fi
+
+logs:
+	@echo "Showing logs for $(GREEN)$(PROJECT_NAME)$(RESET) (Ctrl+C to exit)..."
+	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
+		docker compose logs --tail=50 -f; \
+	else \
+		echo "No $(YELLOW)docker-compose.yml$(RESET) found, $(RED)skipping$(RESET)."; \
+	fi
