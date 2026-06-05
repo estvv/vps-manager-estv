@@ -29,6 +29,14 @@ restart:
 	@echo "Restarting $(GREEN)$(PROJECT_NAME)$(RESET)..."
 	docker compose restart
 
+build:
+	@echo "Building $(GREEN)$(PROJECT_NAME)$(RESET) with $(YELLOW)docker compose build$(RESET)..."
+	docker compose build
+
+build-no-cache:
+	@echo "Building $(GREEN)$(PROJECT_NAME)$(RESET) without cache with $(YELLOW)docker compose build --no-cache$(RESET)..."
+	docker compose build --no-cache
+
 update: pull
 	@echo "Building and restarting $(GREEN)$(PROJECT_NAME)$(RESET) with latest changes..."
 	@if [ -f "docker-compose.yml" ] || [ -f "docker-compose.yaml" ]; then \
