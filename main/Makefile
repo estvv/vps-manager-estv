@@ -2,7 +2,7 @@ TARGET_DIR := projects
 
 PROJECT_NAMES := $(notdir $(patsubst %/,%,$(dir $(wildcard $(TARGET_DIR)/*/Makefile))))
 
-COMMANDS := pull up down down-v restart update backup status
+COMMANDS := pull up down down-v restart update backup status build build-no-cache
 
 INTERACTIVE := logs
 
